@@ -11,8 +11,12 @@ import  {Signup}  from "./pages/signup"
 
 function Protected({ children }: { children: React.ReactNode }) {
   const { currentUser, loading } = useAuth()
+   console.log("loading =", loading);
+  console.log("currentUser =", currentUser);
   if (loading) return <div className="flex h-screen items-center justify-center text-muted-foreground">Loading…</div>
-  if (!currentUser) return <Navigate to="/login" replace />
+  if (!currentUser) { console.log("Redirecting to login"); return <Navigate to="/login" replace /> }
+    console.log("Showing dashboard");
+
   return <>{children}</>
 }
 

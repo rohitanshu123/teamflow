@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { LayoutGrid, Shield, UserCog, User as UserIcon } from 'lucide-react'
+import { LayoutGrid } from 'lucide-react'
 import { useAuth } from '../store/AuthContext'
-import { SEED_USERS } from '../data/seed'
+// import { SEED_USERS } from '../data/seed'
 import { Button } from '../components/ui/Button'
 import { Input, Label } from '../components/ui/Input'
 import { useTheme } from '../hooks/useTheme'
@@ -11,14 +11,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 
-const QUICK = [
-  { role: 'ADMIN' as const, icon: Shield, desc: 'Full access — manage team, delete projects' },
-  { role: 'MANAGER' as const, icon: UserCog, desc: 'Create/edit projects, assign tasks' },
-  { role: 'MEMBER' as const, icon: UserIcon, desc: 'View projects, work on assigned tasks' },
-]
+// const QUICK = [
+//   { role: 'ADMIN' as const, icon: Shield, desc: 'Full access — manage team, delete projects' },
+//   { role: 'MANAGER' as const, icon: UserCog, desc: 'Create/edit projects, assign tasks' },
+//   { role: 'MEMBER' as const, icon: UserIcon, desc: 'View projects, work on assigned tasks' },
+// ]
 
 export function Login() {
-  const { signIn, signInAs } = useAuth()
+  const { } = useAuth()
   const { theme, toggle } = useTheme()
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
@@ -27,23 +27,23 @@ export function Login() {
     const navigate = useNavigate();
 
 
-    const handleLogin = async () => {
-  try {
-    const userCredential =
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+//     const handleLogin = async () => {
+//   try {
+//     const userCredential =
+//       await signInWithEmailAndPassword(
+//         auth,
+//         email,
+//         password
+//       );
 
-    console.log(
-      "Logged in:",
-      userCredential.user.email
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
+//     console.log(
+//       "Logged in:",
+//       userCredential.user.email
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 async function submit(e: React.FormEvent) {
   e.preventDefault();
@@ -155,40 +155,10 @@ async function submit(e: React.FormEvent) {
           </form>
 
 
-          <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
-            <div className="h-px flex-1 bg-border" />
-            QUICK DEMO LOGIN
-            <div className="h-px flex-1 bg-border" />
-          </div>
-
-          <div className="space-y-2">
-            {QUICK.map(({ role, icon: Icon, desc }) => {
-              const user = SEED_USERS.find((u) => u.role === role)!
-              return (
-                <button
-                  key={role}
-                  onClick={() => signInAs(role)}
-                  className="flex w-full items-center gap-3 rounded-lg border border-border p-3 text-left transition-colors hover:border-primary hover:bg-accent"
-                >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-sm font-medium">
-                      {role.charAt(0) + role.slice(1).toLowerCase()} · {user.name}
-                    </span>
-                    <span className="block truncate text-xs text-muted-foreground">{desc}</span>
-                  </span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          Demo only — mock authentication, no real accounts or external data.
-        </p>
-      </div>
+        
     </div>
+    </div>
+    </div>
+    
   )
 }
